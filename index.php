@@ -16,32 +16,39 @@
     <a href="setting.php">[Setting]</a>
     <hr>
 
-    <div class="content">
     <?php
-    $ada_data = false;
+    <?php
+        $urut = isset($_COOKIE['cookie_urut']) ? $_COOKIE['cookie_urut'] : 'tanggal';
+        $arah = isset($_COOKIE['cookie_arah']) ? $_COOKIE['cookie_arah'] : 'asc';
 
-    foreach ($_COOKIE as $key => $value) {
-        if (strpos($key, 'transaksi_') === 0) {
-            $ada_data = true;
-            
-            $tanggal = str_replace('transaksi_', '', $key);
-            $nominal = number_format($value, 0, ',', ',');
+        $data = [];
+        foreach ($_COOKIE as $key => $value) {
+            if (strpos($key, 'transaksi_') === 0) {
+                $tanggal = str_replace('transaksi_', '', $key);
+                $data[] = ['tanggal' => $tanggal, 'nominal' => $value];
+            }
+        }
 
-            if ($ada_data && !isset($ul_opened)) {
+        if (empty($data)) {
+            echo "<i>Belum ada Data</i>";
+        } else {
+            usort($data, function($x, $y) use ($urut, $arah) {
+                if ($urut === 'nominal') {
+                    $hasil = $x['nominal'] - $y['nominal'];
+                } else {
+                    $hasil = strtotime($x['tanggal']) - strtotime($y['tanggal']);
+                }
+                return $arah === 'desc' ? -$hasil : $hasil;
+            });
+
             echo "<ul>";
-            $ul_opened = true;
+            foreach ($data as $item) {
+                $nominal = number_format($item['nominal'], 0, ',', ',');
+                echo "<li>" . $item['tanggal'] . " - Rp. " . $nominal . "</li>";
+            }
+            echo "</ul>";
         }
-
-        echo "<li>" . $tanggal . " - Rp. " . $nominal . "</li>";
-        }
-    }
-
-    if ($ada_data) {
-        echo "</ul>";
-    } else {
-        echo "<i>Belum ada Data</i>";
-    }
     ?>
-    </div>
+
 </body>
 </html>
