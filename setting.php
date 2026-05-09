@@ -10,6 +10,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         header('Location: setting.php?sukses=1');
         exit;
     }
+
+    $urut = isset($_COOKIE['cookie_urut']) ? $_COOKIE['cookie_urut'] : 'tanggal';
+    $arah = isset($_COOKIE['cookie_arah']) ? $_COOKIE['cookie_arah'] : 'asc';
 ?>
 
 
