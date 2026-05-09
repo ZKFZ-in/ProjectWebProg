@@ -24,10 +24,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     <h1>Setting</h1>
 
     <?php
-        if (isset($_COOKIE))
+        if (isset($_GET['sukses']) && $_GET['sukses'] == '1')
             {
-                echo "<p style="color: red;">Data berhasil disimpan</p>";
+                echo "<p style='color: red;'>Data berhasil disimpan</p>"
             }
+        
     ?>
 
     <form method="post" action="setting.php">
