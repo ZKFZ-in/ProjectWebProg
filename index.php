@@ -17,7 +17,6 @@
     <hr>
 
     <?php
-    <?php
         $urut = isset($_COOKIE['cookie_urut']) ? $_COOKIE['cookie_urut'] : 'tanggal';
         $arah = isset($_COOKIE['cookie_arah']) ? $_COOKIE['cookie_arah'] : 'asc';
 
