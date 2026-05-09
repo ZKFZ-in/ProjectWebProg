@@ -7,8 +7,8 @@
 </head>
 <body>
     <h1>Tambah Transaksi</h1>
-    <?<php 
-        if(isset($_COOKIE)) {
+    <?php
+        if(isset($_POST['simpan'])) {
             echo"<p style='color:red;'>Data berhasil disimpan</p>";
         }
     ?>
@@ -22,14 +22,14 @@
             $nama_cookies = "transaksi_".$tanggal;
             setcookie($nama_cookies, $nominal, time() + (3600*24*30));
         } 
-        $tanggal = 
-        $nominal =
+        $tanggal = "";
+        $nominal = "";
     
     ?>
     <form method="post" action="tambah.php">
-        <input type="date" name="tanggal" value="<?php echo $tanggal; ?>">
-        <input type="number" name="nominal" value="<?php echo $nominal; ?>">
-        <input type="submit" value="Simpan">
+        Tanggal <input type="date" name="tanggal" value="<?php echo $tanggal; ?>" required><br><br>
+        Nominal <input type="number" name="nominal" value="<?php echo $nominal; ?>" required><br><br>
+        <input type="submit" name="simpan" value="Simpan">
     </form>
 
     <a href="index.php">Kembali</a>
