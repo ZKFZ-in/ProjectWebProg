@@ -24,10 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     <h1>Setting</h1>
 
     <?php
-        
-    ?>
-
-    <?php
         if (isset($_COOKIE))
             {
                 echo "<p style="color: red;">Data berhasil disimpan</p>";
