@@ -4,8 +4,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         $urut = $_POST['urut'];
         $arah = $_POST['arah'];
 
-        setcookie('cookie_urut', $urut, time() * (3600 * 24 * 30));
-        setcookie('cookie_arah', $arah, time() * (3600 * 24 * 30));
+        setcookie('cookie_urut', $urut, time() + (3600 * 24 * 30));
+        setcookie('cookie_arah', $arah, time() + (3600 * 24 * 30));
 
         header('Location: setting.php?sukses=1');
         exit;
@@ -24,11 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     <h1>Setting</h1>
 
     <?php
-        if (isset($_GET['sukses']) && $_GET['sukses'] == '1')
-            {
-                echo "<p style='color: red;'>Data berhasil disimpan</p>"
-            }
-        
+        if (isset($_GET['sukses']) && $_GET['sukses'] == '1'){
+            echo "<p style='color: red;'>Data berhasil disimpan</p>";
+        }
     ?>
 
     <form method="post" action="setting.php">

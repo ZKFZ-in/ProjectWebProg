@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,17 +21,19 @@
     $ada_data = false;
 
     foreach ($_COOKIE as $key => $value) {
-        $ada_data = true;
+        if (strpos($key, 'transaksi_') === 0) {
+            $ada_data = true;
             
-        $tanggal = str_replace('transaksi_', '', $key);
-        $nominal = number_format($value, 0, ',', ',');
+            $tanggal = str_replace('transaksi_', '', $key);
+            $nominal = number_format($value, 0, ',', ',');
 
-        if ($ada_data && !isset($ul_opened)) {
+            if ($ada_data && !isset($ul_opened)) {
             echo "<ul>";
             $ul_opened = true;
         }
 
         echo "<li>" . $tanggal . " - Rp. " . $nominal . "</li>";
+        }
     }
 
     if ($ada_data) {
